@@ -17,10 +17,9 @@ import { ColorSchemeName, Pressable } from 'react-native'
 import LinkingConfiguration from './LinkingConfiguration'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
-import ModalScreen from '../screens/ModalScreen'
+import Home from '../screens/Home'
+import Hello from '../screens/Modal/Hello'
 import NotFoundScreen from '../screens/NotFoundScreen'
-import TabOneScreen from '../screens/TabOneScreen'
-import TabTwoScreen from '../screens/TabTwoScreen'
 import {
   RootStackParamList,
   RootTabParamList,
@@ -62,7 +61,7 @@ function RootNavigator() {
         options={{ title: 'Oops!' }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen name="Hello" component={Hello} />
       </Stack.Group>
     </Stack.Navigator>
   )
@@ -79,26 +78,26 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}
     >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        name="Home"
+        component={Home}
+        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+          title: 'Home',
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate('Modal')}
+              onPress={() => navigation.navigate('Hello')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}
             >
               <FontAwesome
-                name="info-circle"
+                name="plus"
                 size={25}
                 color={Colors[colorScheme].text}
                 style={{ marginRight: 15 }}
@@ -106,14 +105,6 @@ function BottomTabNavigator() {
             </Pressable>
           ),
         })}
-      />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
       />
     </BottomTab.Navigator>
   )
