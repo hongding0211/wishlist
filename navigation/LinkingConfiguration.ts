@@ -18,8 +18,6 @@ const linking: LinkingOptions<RootStackParamList> = {
           Home: 'home',
         },
       },
-      Hello: 'hello',
-      NotFound: '*',
     },
   },
 }
