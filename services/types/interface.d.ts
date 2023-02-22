@@ -10,7 +10,7 @@ interface IRequest<
   T extends Record<string, string> | undefined,
   P extends Record<string, any> | undefined
 > {
-  params: { token?: string; page?: number; size?: number } & {
+  params: { token?: string; page?: string; size?: string } & {
     [K in keyof T]: T[K]
   }
   body?: P
@@ -46,7 +46,7 @@ export interface IGetUserLogin extends IApi {
     undefined
   >
   response: IResponse<{
-    authToken: string
+    token: string
     uid?: string
   }>
 }
@@ -85,13 +85,12 @@ interface IWishMetaData {
 }
 export interface IPostWishCreate extends IApi {
   request: IRequest<undefined, IWishMetaData>
-  response: IResponse<
-    IWishMetaData & {
-      wishId: string
-      createdAt: number
-      modifiedAt: number
-    }
-  >
+  response: IResponse<{
+    id: string
+    createdAt: number
+    modifiedAt: number
+    meta: IWishMetaData
+  }>
 }
 
 export interface IDeleteWish extends IApi {
@@ -108,9 +107,14 @@ export interface IDeleteWish extends IApi {
 
 export interface IGetWishMy extends IApi {
   request: IRequest<undefined, undefined>
-  response: IResponse<{
-    // TODO
-  }>
+  response: IResponse<
+    {
+      wishId: string
+      createdAt: number
+      modifiedAt: number
+      meta: IWishMetaData
+    }[]
+  >
 }
 
 export interface IPostWishClaim extends IApi {
@@ -121,7 +125,7 @@ export interface IPostWishClaim extends IApi {
     }
   >
   response: IResponse<{
-    // TODO
+    wishId: string
   }>
 }
 
@@ -133,7 +137,7 @@ export interface IPostWishRevert extends IApi {
     }
   >
   response: IResponse<{
-    // TODO
+    revertedClaimId: string
   }>
 }
 
@@ -145,7 +149,15 @@ export interface IGetWishOf extends IApi {
     undefined
   >
   response: IResponse<{
-    // TODO
+    wishId: string
+    createdAt: number
+    modifiedAt: number
+    claimedBy: {
+      uuid?: string
+      name?: string
+      avatar?: string
+    }
+    isClaimed: boolean
   }>
 }
 
@@ -153,20 +165,47 @@ export interface IGetWishMyClaimedCount extends IApi {
   request: IRequest<undefined, undefined>
   response: IResponse<{
     total: number
-    claimed: number // TODO
+    claimed: number
   }>
 }
 
 export interface IGetWishPlaza extends IApi {
   request: IRequest<undefined, undefined>
-  response: IResponse<{
-    // TODO
-  }>
+  response: IResponse<
+    {
+      top: {
+        wishId: string
+        createdAt: number
+        modifiedAt: number
+        meta: IWishMetaData
+        claimedAt?: number
+        claimedBy?: {
+          uuid: string
+          name: string
+          avatar: string
+        }
+      }
+      lastModified: number
+      creator: {
+        uuid: string
+        name: string
+        avatar: string
+      }
+    }[]
+  >
 }
 
 export interface IGetWishMyClaims extends IApi {
   request: IRequest<undefined, undefined>
   response: IResponse<{
-    // TODO
+    wishId: string
+    createdAt: number
+    modifiedAt: number
+    creator: {
+      uuid: string
+      name: string
+      avatar: string
+    }
+    meta: IWishMetaData
   }>
 }
