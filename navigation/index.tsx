@@ -18,8 +18,8 @@ import LinkingConfiguration from './LinkingConfiguration'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme'
 import Home from '../screens/Home'
-import Hello from '../screens/Modal/Hello'
 import NotFoundScreen from '../screens/NotFoundScreen'
+import Hello from '../screens/modal/Hello'
 import {
   RootStackParamList,
   RootTabParamList,
