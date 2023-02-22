@@ -1,5 +1,13 @@
+// ======================================
+//                 Types
+// ======================================
+type Method = 'GET' | 'POST' | 'DELETE'
+
+// ======================================
+//               Interface
+// ======================================
 interface IRequest<
-  T extends Record<string, any> | undefined,
+  T extends Record<string, string> | undefined,
   P extends Record<string, any> | undefined
 > {
   params: { token?: string; page?: number; size?: number } & {
