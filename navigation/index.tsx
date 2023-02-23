@@ -16,6 +16,7 @@ import { ColorSchemeName } from 'react-native'
 import LinkingConfiguration from './LinkingConfiguration'
 import User from '../feature/user/User'
 import Home from '../screens/Home'
+import Login from '../screens/login/Login'
 import SSO from '../screens/modal/SSO'
 import { RootStackParamList, RootTabParamList } from '../types'
 
@@ -29,7 +30,8 @@ export default function Navigation({
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
     >
-      <RootNavigator />
+      {/*<RootNavigator />*/}
+      <LoginNavigator />
       <User />
     </NavigationContainer>
   )
@@ -49,6 +51,14 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
+    </Stack.Navigator>
+  )
+}
+
+function LoginNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Group>
         <Stack.Screen
           name="SSO"

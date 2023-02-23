@@ -18,7 +18,12 @@ const linking: LinkingOptions<RootStackParamList> = {
           Home: 'home',
         },
       },
-      SSO: 'sso',
+      Login: {
+        screens: {
+          Login: 'login',
+          SSO: 'sso',
+        },
+      },
     },
   },
 }

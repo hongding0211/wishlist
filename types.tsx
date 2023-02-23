@@ -8,8 +8,14 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined
-  SSO: undefined
+  Login:
+    | NavigatorScreenParams<{
+        Login: undefined
+        SSO: undefined
+      }>
+    | undefined
 }
+
 export type RootTabParamList = {
   Home: undefined
 }
