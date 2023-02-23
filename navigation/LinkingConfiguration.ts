@@ -18,6 +18,7 @@ const linking: LinkingOptions<RootStackParamList> = {
           Home: 'home',
         },
       },
+      SSO: 'sso',
     },
   },
 }

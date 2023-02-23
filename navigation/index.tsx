@@ -14,7 +14,9 @@ import * as React from 'react'
 import { ColorSchemeName } from 'react-native'
 
 import LinkingConfiguration from './LinkingConfiguration'
+import User from '../feature/user/User'
 import Home from '../screens/Home'
+import SSO from '../screens/modal/SSO'
 import { RootStackParamList, RootTabParamList } from '../types'
 
 export default function Navigation({
@@ -28,6 +30,7 @@ export default function Navigation({
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
     >
       <RootNavigator />
+      <User />
     </NavigationContainer>
   )
 }
@@ -46,6 +49,13 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
+      <Stack.Group>
+        <Stack.Screen
+          name="SSO"
+          options={{ presentation: 'modal' }}
+          component={SSO}
+        />
+      </Stack.Group>
     </Stack.Navigator>
   )
 }

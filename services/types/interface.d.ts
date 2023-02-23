@@ -30,7 +30,7 @@ interface IResponse<
 }
 
 interface IApi {
-  request: IRequest<any, any>
+  request: IRequest<any, any> | undefined
   response: IResponse<any>
 }
 

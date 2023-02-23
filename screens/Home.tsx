@@ -1,9 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
+
+import { useAppSelector } from '../app/store'
 
 export default function Home() {
+  const userData = useAppSelector((state) => state.user.data)
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Wishlist Init</Text>
+      <Text>{userData?.name}</Text>
+      <Text>{userData?.uuid}</Text>
     </View>
   )
 }
@@ -13,8 +18,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  text: {
-    fontSize: 24,
   },
 })
