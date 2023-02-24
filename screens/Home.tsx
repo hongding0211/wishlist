@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Image } from 'react-native'
 
 import { useAppSelector } from '../app/store'
 
@@ -7,8 +7,9 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Text>{userData?.name}</Text>
-      <Text>{userData?.uuid}</Text>
+      <Image source={{ uri: userData?.avatar }} style={styles.logo} />
+      <Text style={styles.text}>User: {userData?.name}</Text>
+      <Text style={styles.text}>UUID: {userData?.uuid}</Text>
     </View>
   )
 }
@@ -18,5 +19,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    marginBottom: 4,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    resizeMode: 'cover',
+    marginBottom: 20,
   },
 })

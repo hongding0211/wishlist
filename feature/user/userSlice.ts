@@ -27,7 +27,7 @@ export const userSlice = createSlice({
     setUserData: (
       state,
       action: PayloadAction<{
-        data: { uuid: number; name: string; avatar: string }
+        data?: { uuid: number; name: string; avatar: string }
       }>
     ) => {
       state.data = action.payload.data

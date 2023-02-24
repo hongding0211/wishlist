@@ -50,6 +50,18 @@ const User: React.FC = () => {
         })
       )
     }
+    if (userInfoData && !userInfoData.success) {
+      dispatch(
+        setToken({
+          token: undefined,
+        })
+      )
+      dispatch(
+        setUserData({
+          data: undefined,
+        })
+      )
+    }
   }, [userInfoData])
 
   return <></>
