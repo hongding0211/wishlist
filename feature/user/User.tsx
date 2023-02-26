@@ -14,11 +14,11 @@ const User: React.FC = () => {
   const navigation = useNavigation<any>() // TODO fix type
   const dispatch = useDispatch()
   const { data: userInfoData } = useUserInfo(undefined, readyGetUserInfo)
-  const token = useAppSelector((state) => state.user.token)
+  const token = useAppSelector(state => state.user.token)
 
   useEffect(() => {
     AsyncStorage.getItem('token')
-      .then((v) => {
+      .then(v => {
         if (v != null) {
           dispatch(
             setToken({

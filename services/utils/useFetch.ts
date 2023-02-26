@@ -11,7 +11,7 @@ function useFetcher<T extends IApi>(
   params: T['request']
 ): (url: string) => Promise<T['response']> {
   // construct url
-  const token = useAppSelector((state) => state.user.token)
+  const token = useAppSelector(state => state.user.token)
   const query: string[] = []
   Object.entries({
     ...params?.params,

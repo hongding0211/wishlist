@@ -4,11 +4,7 @@
  *
  */
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import {
-  DarkTheme,
-  DefaultTheme,
-  NavigationContainer,
-} from '@react-navigation/native'
+import { DarkTheme, DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as React from 'react'
 import { ColorSchemeName } from 'react-native'
@@ -19,11 +15,7 @@ import Home from '../screens/Home'
 import SSO from '../screens/modal/SSO'
 import { RootStackParamList, RootTabParamList } from '../types'
 
-export default function Navigation({
-  colorScheme,
-}: {
-  colorScheme: ColorSchemeName
-}) {
+export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
@@ -69,7 +61,10 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>()
 function BottomTabNavigator() {
   return (
     <BottomTab.Navigator initialRouteName="Home">
-      <BottomTab.Screen name="Home" component={Home} />
+      <BottomTab.Screen
+        name="Home"
+        component={Home}
+      />
     </BottomTab.Navigator>
   )
 }
