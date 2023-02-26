@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   img: {
-    width: Dimensions.get('window').width
-  }
+    width: Dimensions.get('window').width,
+  },
 })
 
 export default Splash

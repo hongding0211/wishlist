@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type UserState = {
   isLogin: boolean
+  isLoginComplete: boolean
   token?: string
   data?: {
     uuid?: number
@@ -35,11 +36,14 @@ export const userSlice = createSlice({
     ) => {
       state.data = action.payload.data
     },
-    setLoginStatus: (state, action: PayloadAction<{status: boolean}>) => {
-      state.isLogin = action.payload.status
-    }
+    setIsLogin: (state, action: PayloadAction<{ isLogin: boolean }>) => {
+      state.isLogin = action.payload.isLogin
+    },
+    setIsLoginComplete: (state, action: PayloadAction<{ isLoginComplete: boolean }>) => {
+      state.isLoginComplete = action.payload.isLoginComplete
+    },
   },
 })
 
-export const { setToken, setUserData, setLoginStatus } = userSlice.actions
+export const { setToken, setUserData, setIsLogin, setIsLoginComplete } = userSlice.actions
 export default userSlice.reducer

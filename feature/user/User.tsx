@@ -1,17 +1,16 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useNavigation } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { setToken, setUserData } from './userSlice'
+import { setIsLogin, setIsLoginComplete, setToken, setUserData } from './userSlice'
 import { useAppSelector } from '../../app/store'
 import { useUserInfo } from '../../services/user'
+
 const User: React.FC = () => {
   const [readyGetUserInfo, setReadyGetUserInfo] = useState(false)
 
   const [hasReadToken, setHasReadToken] = useState(false)
 
-  const navigation = useNavigation<any>() // TODO fix type
   const dispatch = useDispatch()
   const { data: userInfoData } = useUserInfo(undefined, readyGetUserInfo)
   const token = useAppSelector(state => state.user.token)
@@ -27,6 +26,13 @@ const User: React.FC = () => {
           )
         }
       })
+      .catch(() => {
+        dispatch(
+          setToken({
+            token: undefined,
+          })
+        )
+      })
       .finally(() => {
         setHasReadToken(true)
       })
@@ -34,7 +40,11 @@ const User: React.FC = () => {
 
   useEffect(() => {
     if (hasReadToken && !token) {
-      navigation.navigate('SSO')
+      dispatch(
+        setIsLoginComplete({
+          isLoginComplete: true,
+        })
+      )
       return
     }
     if (token) {
@@ -49,6 +59,16 @@ const User: React.FC = () => {
           data: userInfoData.data,
         })
       )
+      dispatch(
+        setIsLoginComplete({
+          isLoginComplete: true,
+        })
+      )
+      dispatch(
+        setIsLogin({
+          isLogin: true,
+        })
+      )
     }
     if (userInfoData && !userInfoData.success) {
       dispatch(
@@ -59,6 +79,11 @@ const User: React.FC = () => {
       dispatch(
         setUserData({
           data: undefined,
+        })
+      )
+      dispatch(
+        setIsLoginComplete({
+          isLoginComplete: true,
         })
       )
     }
