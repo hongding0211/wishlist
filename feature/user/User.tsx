@@ -12,7 +12,7 @@ const User: React.FC = () => {
   const [hasReadToken, setHasReadToken] = useState(false)
 
   const dispatch = useDispatch()
-  const { data: userInfoData } = useUserInfo(undefined, readyGetUserInfo)
+  const { data: userInfoData, mutate: mutateUserInfoData } = useUserInfo(undefined, readyGetUserInfo)
   const token = useAppSelector(state => state.user.token)
 
   useEffect(() => {
@@ -48,7 +48,15 @@ const User: React.FC = () => {
       return
     }
     if (token) {
-      setReadyGetUserInfo(true)
+      if (!readyGetUserInfo) {
+        setReadyGetUserInfo(true)
+      } else {
+        // 先变成 undefined 再进行 revalidation
+        // 使得能够正确触发 useEffect()
+        mutateUserInfoData(undefined).then(() => {
+          mutateUserInfoData().then()
+        })
+      }
     }
   }, [token, hasReadToken])
 
