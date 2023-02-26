@@ -3,9 +3,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import WebView from 'react-native-webview'
 import { useDispatch } from 'react-redux'
 
-import { SSO_URL } from '../../constants/Config'
-import { setToken } from '../../feature/user/userSlice'
-import { useLogin } from '../../services/user'
+import { SSO_URL } from '../../../constants/Config'
+import { setToken } from '../../../feature/user/userSlice'
+import { useLogin } from '../../../services/user'
 
 const SSO: React.FC = () => {
   const [showWebview, setShowWebView] = useState(true)
