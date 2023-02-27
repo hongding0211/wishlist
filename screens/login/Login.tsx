@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import React, { useCallback } from 'react'
-import { Button, Text, View } from 'react-native'
+import { Image, Pressable, Text, View } from 'react-native'
 
 import styles from './style'
 
@@ -13,11 +13,16 @@ const Login: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>WishList</Text>
-      <Button
-        title="Login with SSO"
-        onPress={handleLoginWithSSO}
+      <Image
+        style={styles.img}
+        source={require('../../assets/images/logo.png')}
       />
+      <Pressable
+        style={styles.button}
+        onPress={handleLoginWithSSO}
+      >
+        <Text style={styles.button.text}>Login With SSO</Text>
+      </Pressable>
     </View>
   )
 }

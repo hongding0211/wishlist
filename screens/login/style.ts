@@ -6,9 +6,20 @@ export default StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#fff',
   },
-  title: {
-    fontSize: 48,
-    marginBottom: 12,
+  img: {
+    width: 240,
+    resizeMode: 'contain',
+  },
+  button: {
+    backgroundColor: '#4037FE',
+    borderRadius: 4,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+
+    text: {
+      color: '#fff',
+    },
   },
 })
