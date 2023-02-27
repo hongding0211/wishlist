@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
 import { useAppSelector } from '../app/store'
+import useUser from '../feature/user/useUser'
 import Home from '../screens/Home'
 import Mine from '../screens/Mine'
 import Splash from '../screens/Splash'
@@ -49,6 +50,7 @@ const RootScreen: React.FC = () => {
 }
 
 const Navigation: React.FC = () => {
+  useUser()
   const { isLogin, isLoginComplete } = useAppSelector(state => state.user)
 
   if (!isLoginComplete) {

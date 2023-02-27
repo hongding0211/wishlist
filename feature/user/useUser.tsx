@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { setIsLogin, setIsLoginComplete, setToken, setUserData } from './userSlice'
 import { useAppSelector } from '../../app/store'
 import { useUserInfo } from '../../services/user'
 
-const User: React.FC = () => {
+const useUser = () => {
   const [readyGetUserInfo, setReadyGetUserInfo] = useState(false)
 
   const [hasReadToken, setHasReadToken] = useState(false)
@@ -97,7 +97,7 @@ const User: React.FC = () => {
     }
   }, [userInfoData])
 
-  return <></>
+  return null
 }
 
-export default User
+export default useUser
