@@ -3,23 +3,35 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 
 import store from './app/store'
+import Loading from './components/General/Loading'
+import { LangContext } from './feature/lang/langContext'
 import { ThemeContext } from './feature/theme/themeContext'
 import useCachedResources from './hooks/useCachedResources'
 import Navigation from './navigation'
+import './i18n'
+import getLocales from './utils/locales'
+
+import { useColorScheme } from 'react-native'
+
+const locales = getLocales()
 
 export default function App() {
   const isLoadingComplete = useCachedResources()
+  const colorScheme = useColorScheme()
 
   if (!isLoadingComplete) {
     return null
   } else {
     return (
       <SafeAreaProvider>
-        <ThemeContext.Provider value={{ scheme: 'LIGHT' }}>
-          <Provider store={store}>
-            <StatusBar />
-            <Navigation />
-          </Provider>
+        <ThemeContext.Provider value={{ scheme: colorScheme === 'light' ? 'LIGHT' : 'DARK' }}>
+          <LangContext.Provider value={locales}>
+            <Provider store={store}>
+              <StatusBar />
+              <Navigation />
+              <Loading />
+            </Provider>
+          </LangContext.Provider>
         </ThemeContext.Provider>
       </SafeAreaProvider>
     )

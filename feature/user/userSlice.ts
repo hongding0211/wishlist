@@ -25,6 +25,7 @@ export const userSlice = createSlice({
         AsyncStorage.setItem('token', action.payload.token).then()
       } else {
         state.isLogin = false
+        state.data = undefined
         AsyncStorage.removeItem('token').then()
       }
     },

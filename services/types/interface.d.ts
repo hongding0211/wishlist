@@ -7,7 +7,7 @@ type Method = 'GET' | 'POST' | 'DELETE'
 //               Interface
 // ======================================
 interface IRequest<T extends Record<string, string> | undefined, P extends Record<string, any> | undefined> {
-  params: { token?: string; page?: string; size?: string } & {
+  params?: { token?: string; page?: string; size?: string } & {
     [K in keyof T]: T[K]
   }
   body?: P

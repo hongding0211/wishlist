@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
+import { LoginStackParamList, RootStackParamList } from './types'
 import { useAppSelector } from '../app/store'
 import useUser from '../feature/user/useUser'
 import Home from '../screens/Home'
@@ -12,7 +13,7 @@ import Login from '../screens/login/Login'
 import SSO from '../screens/modal/login/SSO'
 
 const LoginScreen: React.FC = () => {
-  const Stack = createNativeStackNavigator()
+  const Stack = createNativeStackNavigator<LoginStackParamList>()
 
   return (
     <Stack.Navigator>
@@ -20,12 +21,19 @@ const LoginScreen: React.FC = () => {
         <Stack.Screen
           name="Login"
           component={Login}
+          options={{
+            headerShown: false,
+          }}
         />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen
           name="SSO"
           component={SSO}
+          options={{
+            headerTitle: '',
+            headerTransparent: true,
+          }}
         />
       </Stack.Group>
     </Stack.Navigator>
@@ -33,7 +41,7 @@ const LoginScreen: React.FC = () => {
 }
 
 const RootScreen: React.FC = () => {
-  const Tab = createBottomTabNavigator()
+  const Tab = createBottomTabNavigator<RootStackParamList>()
 
   return (
     <Tab.Navigator>

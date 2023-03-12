@@ -1,29 +1,13 @@
 import { useNavigation } from '@react-navigation/native'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import WebView from 'react-native-webview'
-import { useDispatch } from 'react-redux'
 
 import { SSO_URL } from '../../../constants/Config'
-import { setToken } from '../../../feature/user/userSlice'
-import { useLogin } from '../../../services/user'
+import { LoginProps } from '../../../navigation/types'
 
 const SSO: React.FC = () => {
   const [showWebview, setShowWebView] = useState(true)
-  const [shouldUseLogin, setShouldUseLogin] = useState(false)
-
-  const ticketRef = useRef('')
-
-  const { data: userLoginData } = useLogin(
-    {
-      params: {
-        type: 'sso',
-        ticket: ticketRef.current,
-      },
-    },
-    shouldUseLogin
-  )
-  const dispatch = useDispatch()
-  const navigation = useNavigation()
+  const navigation = useNavigation<LoginProps['navigation']>()
 
   const handleNavStateChange = useCallback((state: any) => {
     const { url } = state
@@ -32,24 +16,12 @@ const SSO: React.FC = () => {
     if (!match || match.length < 2) {
       return
     }
+    navigation.navigate('Login', {
+      ticket: match[1],
+      type: 'sso',
+    })
     setShowWebView(false)
-    ticketRef.current = match[1]
-    setShouldUseLogin(true)
   }, [])
-
-  useEffect(() => {
-    const token = userLoginData?.data?.token
-    if (!token) {
-      return
-    }
-    dispatch(
-      setToken({
-        token,
-      })
-    )
-    // TODO 登录成功后的跳转 & 提示
-    navigation.goBack()
-  }, [userLoginData])
 
   return (
     <>
